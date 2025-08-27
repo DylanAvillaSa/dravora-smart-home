@@ -1,0 +1,23 @@
+{
+  "name": "Dravora Smart Home",
+  "short_name": "DSMART",
+  "description": "Aplikasi dravora yang mampu membuat user akses produk canggih di dravora.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0F2F60",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon/dravora.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon/dravora.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "lang": "id"
+}
