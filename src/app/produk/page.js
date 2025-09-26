@@ -106,7 +106,7 @@ export default function CameraPage() {
         {ip ? (
           <div className="border rounded-xl overflow-hidden shadow-md mb-4">
             <img
-              src={`http://${ip}/stream`}
+              src={`https://polyspermia-breann-parallelly.ngrok-free.dev/stream?ngrok-skip-browser-warning=true`}
               alt="ESP32 CAM Stream"
               className="w-full object-cover aspect-video"
             />
