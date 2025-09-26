@@ -28,7 +28,6 @@ export default function CameraPage() {
 
     c.on("message", (topic, message) => {
       const msg = message.toString();
-      console.log("Received:", topic, msg);
 
       if (topic === "dravora/status") {
         setIp(msg.replace("IP:", ""));
