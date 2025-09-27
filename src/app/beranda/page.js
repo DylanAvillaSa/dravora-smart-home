@@ -6,29 +6,25 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Menu, QrCode } from "lucide-react";
 import QRCode from "@/components/QRCode";
+import Link from "next/link";
 
 const products = [
   {
-    id: "D01-Bell",
-    name: "Dravora Bell",
-    description: "Bel pintar untuk rumah anda dengan notifikasi realtime.",
-    image: "/products/d01-bell.png",
-  },
-  {
     id: "d01-dcam",
-    name: "Dravora CCTV",
-    description: "Kamera keamanan canggih dengan streaming HD.",
-    image: "/products/d01-dcam.png",
+    name: "D01 Ccam Basic",
+    description:
+      "D01 Ccam Basic adalah kamera pintar pertama dari Dravora. Versi awal ini fokus pada kemudahan penggunaan dan live streaming di rumah, meski kualitasnya belum setara CCTV profesional. Cocok untuk pengawasan sederhana dan mencoba pengalaman kamera pintar pertama Anda.",
+    image: "/products/d01-basic.png",
+    link: "/produk",
   },
 ];
 
 // Produk yang sudah dibeli user
-const userPurchasedProducts = ["D01-Bell", "d01-dcam"];
 
 const HomePage = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const userName = "Dylanavilla";
+  const userName = "Dravors 😁";
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white px-4 py-4">
@@ -90,41 +86,36 @@ const HomePage = () => {
       </motion.div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto overflow-hidden">
         {products.map((product, index) => {
-          const canAccess = userPurchasedProducts.includes(product.id);
           return (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2, duration: 0.6 }}
-              className={`bg-gray-900/80 backdrop-blur-md rounded-xl shadow-lg p-6 flex flex-col items-center cursor-pointer transition-transform hover:scale-105 relative ${
-                !canAccess ? "opacity-50 cursor-not-allowed" : ""
-              }`}
-              onClick={() => canAccess && router.push(`/produk/${product.id}`)}
+              className={`bg-gray-900/80 backdrop-blur-md rounded-xl shadow-lg p-6 flex flex-col items-center cursor-pointer transition-transform hover:scale-105 relative `}
+              onClick={() => product.link && router.push(product.link)}
             >
               <Image
                 src={product.image}
                 width={150}
                 height={150}
-                className="rounded-md"
+                className="rounded-md scale-[3] mx-auto relative left-5"
                 alt={product.name}
               />
-              <h2 className="text-xl font-semibold mt-4">{product.name}</h2>
-              <p className="text-gray-400 text-center mt-2">
+              <h2 className="text-2xl font-semibold mt-4">{product.name}</h2>
+              <p className="text-gray-400 text-justify text-sm mt-2">
                 {product.description}
               </p>
-              {!canAccess && (
-                <span className="mt-4 text-sm text-yellow-400 font-semibold">
-                  Belum dibeli
-                </span>
-              )}
-              {canAccess && (
-                <button className="mt-4 bg-rose-600 hover:bg-rose-700 transition-all text-white px-6 py-2 rounded-full shadow-md shadow-rose-500/30">
-                  Akses Produk
-                </button>
-              )}
+
+              <Link
+                href={product.link}
+                className="mt-4 bg-rose-600 hover:bg-rose-700 transition-all text-white px-6 py-2 rounded-full shadow-md 
+              shadow-rose-500/30"
+              >
+                Akses Produk
+              </Link>
             </motion.div>
           );
         })}
