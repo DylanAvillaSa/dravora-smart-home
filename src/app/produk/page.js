@@ -18,15 +18,13 @@ export default function CameraPage() {
 
     c.on("connect", () => {
       console.log("MQTT Connected");
-      c.subscribe("dravora/status");
-      c.subscribe("dravora/flashStatus"); // subscribe status flash
+      c.subscribe("d01/ip");
     });
 
     c.on("message", (topic, message) => {
       const msg = message.toString();
-      if (topic === "dravora/status") {
-        setIp(msg.replace("IP:", ""));
-      }
+      console.log(msg);
+      setIp(msg);
     });
 
     return () => {
@@ -58,7 +56,7 @@ export default function CameraPage() {
 
           {/* Direct Access */}
           <a
-            href={`http://${ip}/stream`}
+            href={ip}
             target="_blank"
             rel="noopener noreferrer"
             className="block text-center w-full mt-5 py-3 bg-rose-600 hover:bg-rose-700 rounded-lg shadow-md font-semibold transition"
